@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SampleProject.Models.VehicleModel>
+
+<p>
+    <a asp-action="Insert">Create New</a>
+</p>
+<div class="container d-flex flex-wrap">
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="https://i.pravatar.cc/150?u=@item.Id" class="card-img-top" alt="@item.VehicleBrand">
+            <div class="card-body">
+                <h5 class="card-title">@item.VehicleBrand</h5>
+                <h6 class="card-title">@item.ModelName</h6>
+                <p class="card-text">@Html.DisplayFor(m => item.Price)</p>
+                <a href="/Vehicle/Details/@item.Id" class="btn btn-primary">View details</a>
+                <a href="/Vehicle/EditForm/@item.Id" class="btn btn-warning">Edit</a>
+                <a href="/Vehicle/Delete/@item.Id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+
+</div>
