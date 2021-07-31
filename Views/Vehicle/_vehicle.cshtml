@@ -1,0 +1,19 @@
+﻿@model SampleProject.Models.VehicleModel
+
+
+
+<div class="card" style="width: 18rem;">
+    <img src="https://i.pravatar.cc/150?u=@Model.Id" class="card-img-top" alt="@Model.VehicleBrand">
+    <div class="card-body">
+        <h5 class="card-title">@Model.VehicleBrand</h5>
+        <h6 class="card-title">@Model.ModelName</h6>
+        <p class="card-text">@Html.DisplayFor(m => Model.Price)</p>
+        <a href="/Vehicle/Details/@Model.Id" class="btn btn-primary">View details</a>
+        <a href="/Vehicle/EditForm/@Model.Id" class="btn btn-warning">Edit</a>
+        <a href="/Vehicle/Delete/@Model.Id" class="btn btn-danger">Delete</a>
+        <!-- Button trigger modal -->
+        <button value="@Model.Id" type="button" class="btn btn-primary edit-product-button" data-toggle="modal" data-target="#editModal">
+            Edit modal
+        </button>
+    </div>
+</div>

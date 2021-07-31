@@ -7,17 +7,65 @@
 
     @foreach (var item in Model)
     {
-        <div class="card" style="width: 18rem;">
-            <img src="https://i.pravatar.cc/150?u=@item.Id" class="card-img-top" alt="@item.VehicleBrand">
-            <div class="card-body">
-                <h5 class="card-title">@item.VehicleBrand</h5>
-                <h6 class="card-title">@item.ModelName</h6>
-                <p class="card-text">@Html.DisplayFor(m => item.Price)</p>
-                <a href="/Vehicle/Details/@item.Id" class="btn btn-primary">View details</a>
-                <a href="/Vehicle/EditForm/@item.Id" class="btn btn-warning">Edit</a>
-                <a href="/Vehicle/Delete/@item.Id" class="btn btn-danger">Delete</a>
-            </div>
+
+        <div id="card-number-@item.Id">
+
+        <partial name="_vehicle" model="item" />
+
         </div>
+
     }
 
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label for="Id" class="control-label">Id</label>
+                    <input id="modal-input-id" readonly for="Id" class="form-control" />
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="VehicleBrand" class="control-label">Brand</label>
+                    <input id="modal-input-brand" for="VehicleBrand" class="form-control" />
+                    
+                </div>
+                <div class="form-group">
+                    <label for="ModelName" class="control-label">Model name</label>
+                    <input id="modal-input-name" for="ModelName" class="form-control" />
+                   
+                </div>
+                <div class="form-group">
+                    <label for="Price" class="control-label">Price</label>
+                    <input id="modal-input-price" for="Price" class="form-control" />
+                    
+                </div>
+                <div class="form-group">
+                    <label for="Description" class="control-label">Description</label>
+                    <input id="modal-input-description" for="Description" class="form-control" />
+                    
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="save-button" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
