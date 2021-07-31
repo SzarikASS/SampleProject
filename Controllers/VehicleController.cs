@@ -76,5 +76,25 @@ namespace SampleProject.Controllers
             return View("Index", vehicleSql.GetAllVehicles());
         }
 
+        public IActionResult ShowOneProductJSON (int id)
+        {
+
+            VehiclesDAO vehicles = new VehiclesDAO();
+
+            return Json(vehicles.GetVehicleById(id));
+
+
+        }
+
+        public IActionResult EditProcessReturnPartial(VehicleModel vehicle)
+        {
+            VehiclesDAO vehicleSql = new VehiclesDAO();
+
+            vehicleSql.Update(vehicle);
+
+            return PartialView("_vehicle", vehicle);
+        }
+
+
     }
 }
