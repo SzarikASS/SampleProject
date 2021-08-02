@@ -16,7 +16,7 @@ namespace SampleProject.Services
 
         int Insert(VehicleModel vehicle);
         int Update(VehicleModel vehicle);
-        int Delete(VehicleModel vehicle);
+        bool Delete(VehicleModel vehicle);
 
 
     }

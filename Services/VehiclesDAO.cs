@@ -115,17 +115,25 @@ namespace SampleProject.Services
             {
                 SqlCommand sqlCommand = new SqlCommand(sqlStatement, connection);
 
-                sqlCommand.Parameters.Add("@VehicleBrand", System.Data.SqlDbType.VarChar).Value = vehicle.VehicleBrand;
-                sqlCommand.Parameters.Add("@ModelName", System.Data.SqlDbType.VarChar).Value = vehicle.ModelName;
-                sqlCommand.Parameters.Add("@Price", System.Data.SqlDbType.VarChar).Value = vehicle.Price;
-                sqlCommand.Parameters.Add("@Description", System.Data.SqlDbType.VarChar).Value = vehicle.Description;
+                sqlCommand.Parameters.AddWithValue("@VehicleBrand", vehicle.VehicleBrand);
+                sqlCommand.Parameters.AddWithValue("@ModelName", vehicle.ModelName);
+                sqlCommand.Parameters.AddWithValue("@Price", vehicle.Price);
+                sqlCommand.Parameters.AddWithValue("@Description", vehicle.Description);
 
+                //poprzednia wersja przy ktorej nie dzialal POSTMAN - json
+                //sqlCommand.Parameters.Add("@VehicleBrand", System.Data.SqlDbType.VarChar).Value = vehicle.VehicleBrand;
+                //sqlCommand.Parameters.Add("@ModelName", System.Data.SqlDbType.VarChar).Value = vehicle.ModelName;
+                //sqlCommand.Parameters.Add("@Price", System.Data.SqlDbType.VarChar).Value = vehicle.Price;
+                //sqlCommand.Parameters.Add("@Description", System.Data.SqlDbType.VarChar).Value = vehicle.Description;
 
                 try
                 {
                     connection.Open();
 
-                    newId = sqlCommand.ExecuteNonQuery();
+                    newId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+
+                    //newId = sqlCommand.ExecuteNonQuery();   poprzednia wersja
+
                 }
                 catch (Exception x)
                 {
@@ -170,7 +178,7 @@ namespace SampleProject.Services
 
 
 
-        public int Delete(VehicleModel vehicle)
+        public bool Delete(VehicleModel vehicle)
         {
 
             List<VehicleModel> sqlProducts = new List<VehicleModel>();
@@ -194,8 +202,8 @@ namespace SampleProject.Services
                     Console.WriteLine(x.Message);
                 }
             }
-            return newId;
 
+            return (newId > 0);
         }
 
 

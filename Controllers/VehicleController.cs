@@ -10,16 +10,17 @@ namespace SampleProject.Controllers
 {
     public class VehicleController : Controller
     {
+
+        VehiclesDAO sqlData = new VehiclesDAO();
+
         public IActionResult Index()
         {
-            VehiclesDAO sqlData = new VehiclesDAO();
             return View("Index",sqlData.GetAllVehicles());
         }
 
         public IActionResult Seeker(string searchTerm)
         {
-            VehiclesDAO sqlProducts = new VehiclesDAO();
-            List<VehicleModel> products = sqlProducts.SearchByBrand(searchTerm);
+            List<VehicleModel> products = sqlData.SearchByBrand(searchTerm);
             return View("Index", products);
         }
 
@@ -30,36 +31,30 @@ namespace SampleProject.Controllers
 
         public IActionResult Details(int id)
         {
-            VehiclesDAO getVehicle = new VehiclesDAO();
-            VehicleModel vehicle = getVehicle.GetVehicleById(id);
+            VehicleModel vehicle = sqlData.GetVehicleById(id);
             return View("Details", vehicle);
         }
 
         public IActionResult EditForm(int id)
         {
-            VehiclesDAO vehicleSql = new VehiclesDAO();
-            VehicleModel vehicle = vehicleSql.GetVehicleById(id);
+            VehicleModel vehicle = sqlData.GetVehicleById(id);
 
             return View("EditForm", vehicle);
         }
 
         public IActionResult EditProcess(VehicleModel vehicle)
         {
-            VehiclesDAO vehicleSql = new VehiclesDAO();
-
-            vehicleSql.Update(vehicle);
+            sqlData.Update(vehicle);
              
-            return View("Index", vehicleSql.GetAllVehicles());
+            return View("Index", sqlData.GetAllVehicles());
         }
 
         public IActionResult Delete(int id)
         {
+            VehicleModel vehicle = sqlData.GetVehicleById(id);
+            sqlData.Delete(vehicle);
 
-            VehiclesDAO vehicleSql = new VehiclesDAO();
-            VehicleModel vehicle = vehicleSql.GetVehicleById(id);
-            vehicleSql.Delete(vehicle);
-
-            return View("Index", vehicleSql.GetAllVehicles());
+            return View("Index", sqlData.GetAllVehicles());
         }
 
         public IActionResult Insert()
@@ -69,32 +64,21 @@ namespace SampleProject.Controllers
 
         public IActionResult InsertProcess(VehicleModel vehicle)
         {
-            VehiclesDAO vehicleSql = new VehiclesDAO();
-    
-            int id = vehicleSql.Insert(vehicle);
+            int id = sqlData.Insert(vehicle);
             
-            return View("Index", vehicleSql.GetAllVehicles());
+            return View("Index", sqlData.GetAllVehicles());
         }
 
         public IActionResult ShowOneProductJSON (int id)
         {
-
-            VehiclesDAO vehicles = new VehiclesDAO();
-
-            return Json(vehicles.GetVehicleById(id));
-
-
+            return Json(sqlData.GetVehicleById(id));
         }
 
         public IActionResult EditProcessReturnPartial(VehicleModel vehicle)
         {
-            VehiclesDAO vehicleSql = new VehiclesDAO();
-
-            vehicleSql.Update(vehicle);
+            sqlData.Update(vehicle);
 
             return PartialView("_vehicle", vehicle);
         }
-
-
     }
 }

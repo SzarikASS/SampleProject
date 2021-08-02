@@ -17,7 +17,7 @@ namespace SampleProject.Models
         [StringLength(30)]
         public string VehicleBrand { get; set; }
         [Required]
-        [DisplayName("Type")]
+        [DisplayName("Model name")]
         [StringLength(30)]
         public string ModelName { get; set; }
         [Required]

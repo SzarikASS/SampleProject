@@ -19,7 +19,7 @@
             success: function (data) {
                 console.log(data);
 
-                //fill input fields int he modal
+                //fill input fields in the modal
 
                 $("#modal-input-id").val(data.id);
                 $("#modal-input-brand").val(data.vehicleBrand);
